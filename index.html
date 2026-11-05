@@ -163,13 +163,16 @@ legend::after, .label::after {
   margin-top: 10px;
   background: var(--blue-line);
 }
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tiles.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.tiles.three .tile span { padding-inline: 4px; }
 .tile { position: relative; display: block; min-width: 0; }
 .tile input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
 .tile span {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   min-height: 56px;
   padding: 10px 12px;
   border: 1.5px solid var(--line);
@@ -288,7 +291,7 @@ footer p { margin: 16px 0 0; color: var(--foot-muted); overflow-wrap: anywhere; 
 
   <fieldset>
     <legend>Dove?</legend>
-    <div class="tiles">
+    <div class="tiles three">
       <label class="tile"><input type="radio" name="loc" id="loc-vicenza" value="Vicenza"><span>Vicenza</span></label>
       <label class="tile"><input type="radio" name="loc" id="loc-bassano" value="Bassano"><span>Bassano</span></label>
       <label class="tile"><input type="radio" name="loc" id="loc-online" value="Online"><span>Online</span></label>
