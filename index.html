@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Easy World</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Open+Sans:wght@400;600&family=Raleway:wght@300;500;600&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: Easy World's own structure. White logo bar, a full-width orange-red band with a light headline, form below, slate footer. Blue underline bars under every heading, like their footer. */
+:root {
+  --bg: #FFFFFF;
+  --head: #FFFFFF;
+  --band: #C73A16;
+  --band-ink: #FFFFFF;
+  --ink: #2B2D35;
+  --muted: #5E616C;
+  --line: #CDD0D6;
+  --tile: #F5F6F8;
+  --blue: #1E4DA1;
+  --blue-ink: #FFFFFF;
+  --blue-line: #2F66C8;
+  --wa: #158A45;
+  --wa-ink: #FFFFFF;
+  --foot: #3E404B;
+  --foot-ink: #F1F2F4;
+  --foot-muted: #B4B7C1;
+  --logo: #A93226;
+  --es: #F47A0F;
+  --es-ink: #FFFFFF;
+  --err: #B3261E;
+  --display: "Raleway", "Helvetica Neue", Arial, sans-serif;
+  --body: "Open Sans", -apple-system, "Segoe UI", Arial, sans-serif;
+  --hand: "Gochi Hand", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1C1E25;
+    --head: #23252D;
+    --band: #B93414;
+    --ink: #ECEDF0;
+    --muted: #A9ACB7;
+    --line: #3A3D48;
+    --tile: #262830;
+    --blue: #7DA3EA;
+    --blue-ink: #0E1A33;
+    --blue-line: #3F74D6;
+    --wa: #2FBF6B;
+    --wa-ink: #072B16;
+    --foot: #15161B;
+    --logo: #E8786A;
+    --err: #FF8A80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1C1E25;
+  --head: #23252D;
+  --band: #B93414;
+  --ink: #ECEDF0;
+  --muted: #A9ACB7;
+  --line: #3A3D48;
+  --tile: #262830;
+  --blue: #7DA3EA;
+  --blue-ink: #0E1A33;
+  --blue-line: #3F74D6;
+  --wa: #2FBF6B;
+  --wa-ink: #072B16;
+  --foot: #15161B;
+  --logo: #E8786A;
+  --err: #FF8A80;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 540px;
+  margin: 0 auto;
+  padding-left: max(18px, env(safe-area-inset-left, 0px));
+  padding-right: max(18px, env(safe-area-inset-right, 0px));
+}
+.top {
+  background: var(--head);
+  border-bottom: 1px solid var(--line);
+  padding-block: 18px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.globe { width: 40px; height: 40px; flex: none; color: var(--blue); }
+.logo {
+  font-family: var(--hand);
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--logo);
+}
+.brand { flex-wrap: wrap; justify-content: space-between; row-gap: 12px; }
+.brand-main { display: flex; align-items: center; gap: 12px; }
+.es-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  background: var(--es);
+  color: var(--es-ink);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.1;
+  border-radius: 2px;
+}
+.es-badge b {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--es-ink);
+  border-radius: 50%;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+.band { background: var(--band); color: var(--band-ink); padding-block: 36px 40px; }
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 0 0 14px;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 38px;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.band p { margin: 0; max-width: 40ch; }
+main { padding-block: 34px 44px; display: grid; gap: 30px; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 14px; }
+legend, .label {
+  padding: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 18px;
+  display: block;
+}
+legend::after, .label::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 10px;
+  background: var(--blue-line);
+}
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+.tile { position: relative; display: block; min-width: 0; }
+.tile input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.tile span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 2px;
+  background: var(--tile);
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.tile input:checked + span { background: var(--blue); border-color: var(--blue); color: var(--blue-ink); }
+.tile input:focus-visible + span { outline: 3px solid var(--blue-line); outline-offset: 2px; }
+.names { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.names > div { min-width: 0; }
+.sub { display: block; margin-bottom: 8px; font-size: 15px; color: var(--muted); }
+.field {
+  width: 100%;
+  min-height: 54px;
+  padding: 10px 14px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--tile);
+  border: 1.5px solid var(--line);
+  border-radius: 2px;
+}
+.field:focus-visible { outline: 3px solid var(--blue-line); outline-offset: 2px; }
+.actions { display: grid; gap: 12px; }
+.send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 12px 18px;
+  background: var(--wa);
+  color: var(--wa-ink);
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.send:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.err { margin: 0; font-size: 15px; font-weight: 600; color: var(--err); }
+footer { background: var(--foot); color: var(--foot-ink); padding-block: 30px 34px; }
+footer h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 21px;
+}
+footer h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 10px;
+  background: var(--blue-line);
+}
+footer p { margin: 16px 0 0; color: var(--foot-muted); overflow-wrap: anywhere; }
+.foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+.foot-grid section { min-width: 0; }
+@media (prefers-reduced-motion: reduce) { .tile span { transition: none; } }
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap brand">
+    <div class="brand-main">
+      <svg class="globe" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <circle cx="20" cy="20" r="16"></circle>
+        <ellipse cx="20" cy="20" rx="7" ry="16"></ellipse>
+        <path d="M4 20h32M7 11h26M7 29h26"></path>
+      </svg>
+      <span class="logo">Easy World</span>
+    </div>
+    <span class="es-badge"><b>es</b>English School Bassano</span>
+  </div>
+</header>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Vicenza · Bassano · Online</p>
+    <h1>Lingue orientali e disegno manga</h1>
+    <p>Scegli cosa ti interessa e dove. Le risposte si aprono in WhatsApp, pronte da inviare.</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <div>
+    <span class="label">I tuoi dati</span>
+    <div class="names">
+      <div>
+        <label class="sub" for="first-name">Nome</label>
+        <input class="field" type="text" id="first-name" autocomplete="given-name" required>
+      </div>
+      <div>
+        <label class="sub" for="last-name">Cognome</label>
+        <input class="field" type="text" id="last-name" autocomplete="family-name" required>
+      </div>
+    </div>
+  </div>
+
+  <fieldset>
+    <legend>Cosa ti interessa?</legend>
+    <div class="tiles">
+      <label class="tile"><input type="radio" name="interest" id="int-jp" value="Giapponese"><span>Giapponese</span></label>
+      <label class="tile"><input type="radio" name="interest" id="int-ko" value="Coreano"><span>Coreano</span></label>
+      <label class="tile"><input type="radio" name="interest" id="int-manga" value="Disegno manga"><span>Disegno manga</span></label>
+      <label class="tile"><input type="radio" name="interest" id="int-other" value="Altro"><span>Altro</span></label>
+    </div>
+    <div id="other-wrap" hidden>
+      <label class="sub" for="other-lang">Quale lingua vuoi imparare?</label>
+      <input class="field" type="text" id="other-lang" autocomplete="off" placeholder="Per esempio: arabo, turco, olandese">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Dove?</legend>
+    <div class="tiles">
+      <label class="tile"><input type="radio" name="loc" id="loc-vicenza" value="Vicenza"><span>Vicenza</span></label>
+      <label class="tile"><input type="radio" name="loc" id="loc-bassano" value="Bassano"><span>Bassano</span></label>
+      <label class="tile"><input type="radio" name="loc" id="loc-online" value="Online"><span>Online</span></label>
+    </div>
+  </fieldset>
+
+  <div>
+    <label class="label" for="email">Email (facoltativa)</label>
+    <input class="field" type="email" id="email" inputmode="email" autocomplete="email" placeholder="nome@esempio.com">
+  </div>
+
+  <div class="actions">
+    <p class="err" id="err" role="alert" hidden></p>
+    <a class="send" id="send" href="https://wa.me/393520745835" target="_blank" rel="noopener">Invia su WhatsApp</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <section>
+        <h2>Easy World</h2>
+        <p>Scuola di lingue a Vicenza<br>Viale San Lazzaro, 173<br>36100 Vicenza<br>+39 0444 962200<br>info@easyworldnet.com</p>
+      </section>
+      <section>
+        <h2>English School Bassano</h2>
+        <p>Sede di Bassano<br>+39 352 074 5835 (WhatsApp)</p>
+      </section>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var NUMBER = "393520745835";
+  function numberFor() { return NUMBER; }
+  var emailEl = document.getElementById("email");
+  var otherEl = document.getElementById("other-lang");
+  var firstEl = document.getElementById("first-name");
+  var lastEl = document.getElementById("last-name");
+  var send = document.getElementById("send");
+  var err = document.getElementById("err");
+
+  function selected(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : "";
+  }
+  function message() {
+    var interest = selected("interest");
+    if (interest === "Altro" && otherEl.value.trim()) { interest = "Altro (" + otherEl.value.trim() + ")"; }
+    var m = "Nome: " + firstEl.value.trim() + "\nCognome: " + lastEl.value.trim() + "\nInteresse: " + interest + "\nLocation: " + selected("loc");
+    if (emailEl.value.trim()) { m += "\nEmail: " + emailEl.value.trim(); }
+    return m;
+  }
+  function problem() {
+    if (!firstEl.value.trim()) { return "Inserisci il tuo nome."; }
+    if (!lastEl.value.trim()) { return "Inserisci il tuo cognome."; }
+    if (!selected("interest")) { return "Scegli cosa ti interessa."; }
+    if (selected("interest") === "Altro" && !otherEl.value.trim()) { return "Scrivi quale lingua vuoi imparare."; }
+    if (!selected("loc")) { return "Scegli dove: Vicenza, Bassano o online."; }
+    if (emailEl.value.trim() && !emailEl.checkValidity()) { return "Controlla l'email: sembra incompleta."; }
+    return "";
+  }
+  function refresh() {
+    var isOther = selected("interest") === "Altro";
+    document.getElementById("other-wrap").hidden = !isOther;
+    send.href = "https://wa.me/" + numberFor(selected("loc")) + "?text=" + encodeURIComponent(message());
+    if (!err.hidden && !problem()) { err.hidden = true; }
+  }
+
+  document.addEventListener("change", refresh);
+  emailEl.addEventListener("input", refresh);
+  otherEl.addEventListener("input", refresh);
+  firstEl.addEventListener("input", refresh);
+  lastEl.addEventListener("input", refresh);
+
+  send.addEventListener("click", function (e) {
+    var p = problem();
+    if (p) {
+      e.preventDefault();
+      err.textContent = p;
+      err.hidden = false;
+    }
+  });
+
+  refresh();
+})();
+</script>
+
+</body>
+</html>
